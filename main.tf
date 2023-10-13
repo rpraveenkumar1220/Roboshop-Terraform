@@ -12,18 +12,17 @@ module "vpc"{
   for_each = var.vpc
   env = var.env
   cidr_block = each.value["cidr_block"]
-
 }
 
 
 
 module "subnet"{
   source = "git::https://github.com/rpraveenkumar1220/Subnets-Module-Terraform.git"
-  subnets=each.value["subnets"]
-  for_each = var.subnets
+  for_each = var.vpc[each.value[subnets]]
   cidr_block = each.value["cidr_block"]
   vpc_id = data.aws_vpc.selected.id
   }
+
 
 
 
