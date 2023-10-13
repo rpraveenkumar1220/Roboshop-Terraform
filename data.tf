@@ -1,3 +1,4 @@
 data "aws_vpc" "selected" {
-  cidr_block =var.vpc[cidr_block]
+  for_each = var.vpc
+  cidr_block = each.value["cidr_block"]
 }
