@@ -14,9 +14,7 @@ module "vpc"{
   cidr_block = each.value["cidr_block"]
 }
 
-output "test" {
-  value = data.aws_vpc.selected.id
-}
+
 
 module "subnet"{
   source = "git::https://github.com/rpraveenkumar1220/Subnets-Module-Terraform.git"
