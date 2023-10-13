@@ -26,7 +26,7 @@ module "subnet"{
   env = var.env
 
   tags = {
-    Name = each.key
+    Name = each.key-${var.env}
   }
   }
 
