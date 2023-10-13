@@ -1,3 +1,3 @@
 data "aws_vpc" "selected" {
-  id = var.vpc_id
+  cidr_block = var.cidr_block
 }
