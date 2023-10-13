@@ -1,3 +1,3 @@
 data "aws_vpc" "selected" {
-  cidr_block = var.cidr_block
+  cidr_block = module.vpc[cidr_block]
 }
