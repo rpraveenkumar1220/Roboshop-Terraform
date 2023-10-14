@@ -12,7 +12,6 @@ module "vpc"{
   for_each = var.vpc
   env = var.env
   cidr_block = each.value["cidr_block"]
-  subnet_name = var.subnets
   subnets = each.value["subnets"]
   }
 
