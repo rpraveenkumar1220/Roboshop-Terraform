@@ -20,7 +20,6 @@ module"subnet"{
   for_each = var.subnets
   cidr_block = var.subnets["cidr_block"]
   vpc_id = data.aws_vpc.selected.id
-  env = var.env
 
 }
 
