@@ -7,7 +7,7 @@ module "app"{
 }
 */
 
-module "vpc"{
+ module "vpc" {
   source = "git::https://github.com/rpraveenkumar1220/VPC-Module-Terraform.git"
   for_each = var.vpc
   env = var.env
