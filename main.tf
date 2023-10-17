@@ -14,6 +14,7 @@ module "app"{
   env = var.env
   cidr_block = each.value["cidr_block"]
   subnets = each.value["subnets"]
+  default_vpc_id = var.default_vpc_id
  }
 
 module "app_instance" {
@@ -21,7 +22,9 @@ module "app_instance" {
  env       = var.env
  component = "test"
  subnet_id = lookup(lookup(lookup(lookup(module.vpc,"main",null ),"subnet_ids",null),"app",null),"subnet_ids",null)[0]
- vpc_id =lookup(lookup(module.vpc,"main",null),"vpc_id" , null)
+ vpc_id =lookup(lookup(module.vpc,"main",null), "vpc_id" , null)
+
+
 }
 
 
