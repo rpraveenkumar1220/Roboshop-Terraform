@@ -17,10 +17,10 @@ module "app"{
  }
 
 module "app_instance" {
- source = "git::https://github.com/rpraveenkumar1220/App-Module-Terraform.git"
- env = var.env
+ source    = "git::https://github.com/rpraveenkumar1220/App-Module-Terraform.git"
+ env       = var.env
  component = "test"
- subnet_id = element(lookup(lookup(lookup(var.vpc,"main",null ),"app",null),"cidr_block",null))))[0]
+ subnet_id = lookup(lookup(lookup(lookup(module.vpc,"main",null ),"subnet_ids",null),"app",null),"subnet_ids",null)))[0]
 }
 
 
