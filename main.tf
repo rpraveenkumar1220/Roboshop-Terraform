@@ -15,7 +15,6 @@ module "app"{
   cidr_block = each.value["cidr_block"]
   subnets = each.value["subnets"]
  }
-/*
 
 module "app_instance" {
  source    = "git::https://github.com/rpraveenkumar1220/App-Module-Terraform.git"
@@ -23,7 +22,6 @@ module "app_instance" {
  component = "test"
  subnet_id = lookup(lookup(lookup(lookup(module.vpc,"main",null ),"subnet_ids",null),"app",null),"subnet_ids",null)
 }
-*/
 
 
 
