@@ -13,6 +13,10 @@
 
 env = "dev"
 
+default_vpc_id = "vpc-093e0600672c5ecc1"
+
+allow_ssh_cidr = ["172.31.0.8/32"]
+
 vpc = {
   main = {
     cidr_block = "10.10.0.0/16"
@@ -25,4 +29,10 @@ vpc = {
   }
 }
 
-default_vpc_id = "vpc-093e0600672c5ecc1"
+rabbitmq = {
+  main = {
+    instance_type = "t3.small"
+    component =rabbitmq
+  }
+}
+
