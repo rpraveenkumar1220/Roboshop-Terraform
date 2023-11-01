@@ -14,6 +14,7 @@
 env = "dev"
 
 default_vpc_id = "vpc-093e0600672c5ecc1"
+default_vpc_rt = "rtb-0bc1356ac15da6b6c"
 
 allow_ssh_cidr = ["172.31.0.0/16"]
 

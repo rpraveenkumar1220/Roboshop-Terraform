@@ -16,6 +16,7 @@ module "app"{
   cidr_block = each.value["cidr_block"]
   subnets = each.value["subnets"]
   default_vpc_id = var.default_vpc_id
+  default_vpc_rt = var.default_vpc_rt
  }
 
 ### Creating Instance in the APP subnet
