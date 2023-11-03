@@ -15,6 +15,8 @@ env = "dev"
 
 default_vpc_id = "vpc-093e0600672c5ecc1"
 default_vpc_rt = "rtb-0bc1356ac15da6b6c"
+kms_key_arn    = ""
+kms_key_id     = ""
 
 allow_ssh_cidr = ["172.31.0.0/16"]
 
@@ -34,6 +36,18 @@ rabbitmq = {
   main = {
     instance_type = "t3.small"
     component = "rabbitmq"
+  }
+}
+
+rds = {
+  main = {
+    component = "mysql"
+    engine         = "aurora-mysql"
+    engine_version = "5.7.mysql_aurora.2.11.3"
+    database_name  = "dummy"
+    instance_count = 1
+    instance_class = "db.t3.small"
+
   }
 }
 

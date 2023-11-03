@@ -29,7 +29,7 @@ module "app_instance" {
 }
 
 
-### Creating Rabbitmq service
+/*### Creating Rabbitmq service
 module "rabbitmq" {
  source        = "git::https://github.com/rpraveenkumar1220/RabbitMQ-Module-Terraform.git"
  for_each      = var.rabbitmq
@@ -41,9 +41,26 @@ module "rabbitmq" {
 
  env            = var.env
  allow_ssh_cidr = var.allow_ssh_cidr
+}*/
+
+
+
+### Creating RDS service
+module "rabbitmq" {
+ source        = "git::https://github.com/rpraveenkumar1220/RDS-Module-Terraform.git"
+ for_each      = var.rds
+ component     = each.value["component"]
+ engine        = each.value["engine"]
+ engine_version=each.value["engine_version"]
+ database_name = each.value["database_name"]
+ instance_class = each.value["instance_class"]
+ instance_count = each.value["instance_count"]
+ kms_key_arn   = var.kms_key_arn
+ subnet_ids    = lookup(lookup(lookup(lookup(module.vpc, "main", null ), "subnet_ids", null), "db", null), "subnet_ids", null)[0]
+ sg_subnet_cidr = lookup(lookup(lookup(lookup(module.vpc,"main",null ),"subnet_ids",null),"app",null),"cidr_block",null)
+ vpc_id        = lookup(lookup(module.vpc, "main", null), "vpc_id", null)
+ env            = var.env
 }
-
-
 
 
 
