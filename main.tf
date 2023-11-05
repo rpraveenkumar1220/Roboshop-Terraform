@@ -35,7 +35,7 @@ module "rabbitmq" {
  for_each      = var.rabbitmq
  component     = each.value["component"]
  instance_type = each.value["instance_type"]
- subnet_id     = lookup(lookup(lookup(lookup(module.vpc, "main", null ), "subnet_ids", null), "db", null), "subnet_ids", null)
+ subnet_id     = each.value["lookup(lookup(lookup(lookup(module.vpc, "main", null ), "subnet_ids", null), "db", null), "subnet_ids", null)"]
  sg_subnet_cidr = lookup(lookup(lookup(lookup(module.vpc,"main",null ),"subnet_ids",null),"app",null),"cidr_block",null)
  vpc_id        = lookup(lookup(module.vpc, "main", null), "vpc_id", null)
  kms_key_arn    = var.kms_key_arn
