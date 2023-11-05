@@ -15,8 +15,8 @@ env = "dev"
 
 default_vpc_id = "vpc-093e0600672c5ecc1"
 default_vpc_rt = "rtb-0bc1356ac15da6b6c"
-kms_key_arn    = ""
-kms_key_id     = ""
+kms_key_arn    = "arn:aws:kms:us-east-1:751367052640:key/a22c937a-e218-4e4a-b545-d6c384ff99fc"
+kms_key_id     = "	a22c937a-e218-4e4a-b545-d6c384ff99fc"
 
 allow_ssh_cidr = ["172.31.0.0/16"]
 
