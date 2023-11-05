@@ -41,13 +41,35 @@ rabbitmq = {
 
 rds = {
   main = {
-    component = "mysql"
+    component      = "mysql"
     engine         = "aurora-mysql"
     engine_version = "5.7.mysql_aurora.2.11.3"
     database_name  = "dummy"
     instance_count = 1
     instance_class = "db.t3.small"
 
+  }
+}
+
+docdb ={
+  main ={
+    component      = "docdb"
+    engine         = "docdb"
+    engine_version = "4.0.0"
+    instance_count = 1
+    instance_class = "db.t3.medium"
+  }
+}
+
+elasticache = {
+  main = {
+    component             = "elasticache"
+    engine                = "redis"
+    engine_version        = "6.x"
+    node_type             = "cache.t3.micro"
+    parameter_group_name  = "default.redis6.x.cluster.on"
+    num_node_groups       = 1
+    replicas_per_node_group= 1
   }
 }
 
