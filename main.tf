@@ -29,7 +29,7 @@ module "app_instance" {
 }
 
 
-### Creating Rabbitmq service
+/*### Creating Rabbitmq service
 module "rabbitmq" {
  source        = "git::https://github.com/rpraveenkumar1220/RabbitMQ-Module-Terraform.git"
  for_each      = var.rabbitmq
@@ -41,11 +41,10 @@ module "rabbitmq" {
  kms_key_arn    = var.kms_key_arn
  env            = var.env
  allow_ssh_cidr = var.allow_ssh_cidr
-}
+}*/
 
 
 
-/*
 ### Creating RDS service
 module "rds" {
  source        = "git::https://github.com/rpraveenkumar1220/RDS-Module-Terraform.git"
@@ -57,7 +56,7 @@ module "rds" {
  instance_class = each.value["instance_class"]
  instance_count = each.value["instance_count"]
  kms_key_arn   = var.kms_key_arn
- subnet_ids    = lookup(lookup(lookup(lookup(module.vpc, "main", null ), "subnet_ids", null), "db", null), "subnet_ids", null)[0]
+ subnet_ids    = lookup(lookup(lookup(lookup(module.vpc, "main", null ), "subnet_ids", null), "db", null), "subnet_ids", null)
  sg_subnet_cidr = lookup(lookup(lookup(lookup(module.vpc,"main",null ),"subnet_ids",null),"app",null),"cidr_block",null)
  vpc_id        = lookup(lookup(module.vpc, "main", null), "vpc_id", null)
  env            = var.env
@@ -73,7 +72,7 @@ module "docdb" {
  instance_class = each.value["instance_class"]
  instance_count = each.value["instance_count"]
  kms_key_arn   = var.kms_key_arn
- subnet_ids    = lookup(lookup(lookup(lookup(module.vpc, "main", null ), "subnet_ids", null), "db", null), "subnet_ids", null)[0]
+ subnet_ids    = lookup(lookup(lookup(lookup(module.vpc, "main", null ), "subnet_ids", null), "db", null), "subnet_ids", null)
  sg_subnet_cidr = lookup(lookup(lookup(lookup(module.vpc,"main",null ),"subnet_ids",null),"app",null),"cidr_block",null)
  vpc_id        = lookup(lookup(module.vpc, "main", null), "vpc_id", null)
  env            = var.env
@@ -92,12 +91,11 @@ module "elasticache" {
  num_node_groups=each.value["num_node_groups"]
  replicas_per_node_group=each.value["replicas_per_node_group"]
  kms_key_arn   = var.kms_key_arn
- subnet_ids    = lookup(lookup(lookup(lookup(module.vpc, "main", null ), "subnet_ids", null), "db", null), "subnet_ids", null)[0]
+ subnet_ids    = lookup(lookup(lookup(lookup(module.vpc, "main", null ), "subnet_ids", null), "db", null), "subnet_ids", null)
  sg_subnet_cidr = lookup(lookup(lookup(lookup(module.vpc,"main",null ),"subnet_ids",null),"app",null),"cidr_block",null)
  vpc_id        = lookup(lookup(module.vpc, "main", null), "vpc_id", null)
  env            = var.env
 }
-*/
 
 
 
