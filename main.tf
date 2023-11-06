@@ -87,7 +87,6 @@ module "elasticache" {
  engine_version=each.value["engine_version"]
  node_type     = each.value["node_type"]
  parameter_group_name = each.value["parameter_group_name"]
- instance_count = each.value["instance_count"]
  num_node_groups=each.value["num_node_groups"]
  replicas_per_node_group=each.value["replicas_per_node_group"]
  kms_key_arn   = var.kms_key_arn
