@@ -84,7 +84,7 @@ alb = {
     name = "private"
     load_balancer_type = "application"
     internal = true
-    subnet_ref = "private"
+    subnet_ref = "app"
       }
 }
 

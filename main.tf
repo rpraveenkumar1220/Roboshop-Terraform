@@ -104,8 +104,8 @@ module "alb" {
  load_balancer_type = each.value["load_balancer_type"]
  internal           =each.value["internal"]
 
- sg_subnet_cidr = each.value["name"] == "public" lookup(lookup(lookup(lookup(module.vpc,"main",null ),"subnet_ids",null),"app",null),"cidr_block",null)
- subnet_ids    = lookup(lookup(lookup(lookup(module.vpc, "main", null ), "subnet_ids", null), "db", null), "subnet_ids", null)
+ sg_subnet_cidr = each.value["name"] == "public" ? ["0.0.0.0/0"] : concat(lookup(lookup(lookup(lookup(module.vpc,"main",null ),"subnet_ids",null),"web",null),"cidr_block",null) , lookup(lookup(lookup(lookup(module.vpc,"main",null ),"subnet_ids",null),"app",null),"cidr_block",null))
+ subnets    = lookup(lookup(lookup(lookup(module.vpc, "main", null ), "subnet_ids", null), each.value["subnet_ref"], null), "subnet_ids", null)
 
 
  vpc_id        = lookup(lookup(module.vpc, "main", null), "vpc_id", null)
