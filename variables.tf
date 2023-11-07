@@ -8,6 +8,7 @@ variable "rds" {}
 variable "kms_key_arn" {}
 variable "docdb" {}
 variable "elasticache" {}
+variable "alb" {}
 
 
 

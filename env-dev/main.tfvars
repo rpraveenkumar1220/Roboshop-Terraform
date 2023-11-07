@@ -73,3 +73,23 @@ elasticache = {
   }
 }
 
+alb = {
+  public = {
+    name = "public"
+    load_balancer_type = "application"
+    internal = false
+    subnet_ref = "public"
+  }
+  private = {
+    name = "private"
+    load_balancer_type = "application"
+    internal = true
+    subnet_ref = "private"
+      }
+}
+
+
+
+
+
+

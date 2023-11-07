@@ -96,6 +96,21 @@ module "elasticache" {
  env            = var.env
 }
 
+### Creating Application LoadBalancer Module
+module "alb" {
+ source             = "git::https://github.com/rpraveenkumar1220/ALB-Module-Terraform.git"
+ for_each           = var.alb
+ name               = each.value["name"]
+ load_balancer_type = each.value["load_balancer_type"]
+ internal           =each.value["internal"]
+
+ sg_subnet_cidr = each.value["name"] == "public" lookup(lookup(lookup(lookup(module.vpc,"main",null ),"subnet_ids",null),"app",null),"cidr_block",null)
+ subnet_ids    = lookup(lookup(lookup(lookup(module.vpc, "main", null ), "subnet_ids", null), "db", null), "subnet_ids", null)
+
+
+ vpc_id        = lookup(lookup(module.vpc, "main", null), "vpc_id", null)
+ env            = var.env
+
 
 
 
