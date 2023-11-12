@@ -9,6 +9,14 @@ variable "kms_key_arn" {}
 variable "docdb" {}
 variable "elasticache" {}
 variable "alb" {}
+variable "apps" {}
+variable "min_size" {}
+variable "max_size" {}
+variable "desired_capacity" {}
+variable "instance_type" {}
+variable "app_port" {}
+variable "lb_dns_name" {}
+variable "subnets" {}
 
 
 

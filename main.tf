@@ -1,11 +1,3 @@
-/*
-module "app"{
-  source = "git::https://github.com/rpraveenkumar1220/App-Module-Terraform.git"
-  for_each = var.component
-  env = var.env
-  component = each.key
-}
-*/
 
 
 ### Creating VPC for Roboshop project
@@ -19,14 +11,14 @@ module "app"{
   default_vpc_rt = var.default_vpc_rt
  }
 
-### Creating Instance in the APP subnet
+/*### Creating Instance in the APP subnet
 module "app_instance" {
  source    = "git::https://github.com/rpraveenkumar1220/App-Module-Terraform.git"
  env       = var.env
  component = "test"
  subnet_id = lookup(lookup(lookup(lookup(module.vpc,"main",null ),"subnet_ids",null),"app",null),"subnet_ids",null)[0]
  vpc_id =lookup(lookup(module.vpc,"main",null), "vpc_id" , null)
-}
+}*/
 
 
 /*### Creating Rabbitmq service
@@ -45,6 +37,7 @@ module "rabbitmq" {
 
 
 
+/*
 ### Creating RDS service
 module "rds" {
  source        = "git::https://github.com/rpraveenkumar1220/RDS-Module-Terraform.git"
@@ -95,6 +88,7 @@ module "elasticache" {
  vpc_id        = lookup(lookup(module.vpc, "main", null), "vpc_id", null)
  env            = var.env
 }
+*/
 
 ### Creating Application LoadBalancer Module
 module "alb" {
@@ -102,15 +96,36 @@ module "alb" {
  for_each           = var.alb
  name               = each.value["name"]
  load_balancer_type = each.value["load_balancer_type"]
- internal           =each.value["internal"]
+ internal           = each.value["internal"]
 
- sg_subnet_cidr = each.value["name"] == "public" ? ["0.0.0.0/0"] : concat(lookup(lookup(lookup(lookup(module.vpc,"main",null ),"subnet_ids",null),"web",null),"cidr_block",null) , lookup(lookup(lookup(lookup(module.vpc,"main",null ),"subnet_ids",null),"app",null),"cidr_block",null))
- subnets    = lookup(lookup(lookup(lookup(module.vpc, "main", null ), "subnet_ids", null), each.value["subnet_ref"], null), "subnet_ids", null)
+ sg_subnet_cidr = each.value["name"] == "public" ? ["0.0.0.0/0" ] : local.web_app_subnets_cidr
+ subnets        = lookup(lookup(lookup(lookup(module.vpc, "main", null ), "subnet_ids", null), each.value["subnet_ref"], null), "subnet_ids", null)
+
+ vpc_id = lookup(lookup(module.vpc, "main", null), "vpc_id", null)
+ env    = var.env
+}
 
 
- vpc_id        = lookup(lookup(module.vpc, "main", null), "vpc_id", null)
- env            = var.env
 
+### Creating Application  Module
+module "apps" {
+ source    = "git::https://github.com/rpraveenkumar1220/App-Module-Terraform.git"
+ for_each   = var.apps
+ component  = each.value["component"]
+ min_size = each.value["min_size"]
+ max_size = each.value["max_size"]
+ desired_capacity = each.value["desired_capacity"]
+ instance_type = each.value["instance_type"]
+ app_port = each.value["instance_type"]
+
+ lb_dns_name = lookup(lookup(lookup(module.alb,"main",null),each.value["lb_ref"],null),"dns_name",null)
+ sg_subnet_cidr = each.value["component"] == "frontend" ? local.public_web_subnets_cidr : lookup(lookup(lookup(lookup(lookup(var.vpc,"main",null ),"subnets",null),each.value["subnet_ref"],null),"cidr_block",null)
+ subnets  = lookup(lookup(lookup(lookup(module.vpc, "main", null ), "subnet_ids", null), each.value["subnet_ref"], null), "subnet_ids", null)
+ listener_arn = lookup(lookup(lookup(module.alb,"main",null), each.value["lb_ref"],null),"listener_arn" , null)
+
+ vpc_id = lookup(lookup(module.vpc, "main", null), "vpc_id", null)
+ env    = var.env
+}
 
 
 

@@ -89,6 +89,79 @@ alb = {
 }
 
 
+apps = {
+
+  frontend={
+    component = "frontend"
+    min_size = 1
+    max_size = 1
+    desired_capacity = 1
+    instance_type = "t3.micro"
+    app_port = 8080
+    subnet_ref = "web"
+    lb_ref = "public"
+    lb_rule_priority = 100
+  }
+
+  cart={
+    component = "cart"
+    min_size = 1
+    max_size = 1
+    desired_capacity = 1
+    instance_type = "t3.micro"
+    app_port = 8080
+    subnet_ref = "app"
+    lb_ref = "private"
+    lb_rule_priority = 101
+  }
+  catalogue={
+    component = "catalogue"
+    min_size = 1
+    max_size = 1
+    desired_capacity = 1
+    instance_type = "t3.micro"
+    app_port = 8080
+    subnet_ref = "app"
+    lb_ref = "private"
+    lb_rule_priority = 102
+  }
+  user={
+    component = "user"
+    min_size = 1
+    max_size = 1
+    desired_capacity = 1
+    instance_type = "t3.micro"
+    app_port = 8080
+    subnet_ref = "app"
+    lb_ref = "private"
+    lb_rule_priority = 103
+  }
+  shipping={
+    component = "shipping"
+    min_size = 1
+    max_size = 1
+    desired_capacity = 1
+    instance_type = "t3.micro"
+    app_port = 8080
+    subnet_ref = "app"
+    lb_ref = "private"
+    lb_rule_priority = 104
+  }
+  payment={
+    component = "payment"
+    min_size = 1
+    max_size = 1
+    desired_capacity = 1
+    instance_type = "t3.micro"
+    app_port = 8080
+    subnet_ref = "app"
+    lb_ref = "private"
+    lb_rule_priority = 105
+  }
+}
+
+
+
 
 
 
