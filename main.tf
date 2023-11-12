@@ -129,6 +129,7 @@ module "apps" {
 
   vpc_id           = lookup(lookup(module.vpc, "main", null), "vpc_id", null)
   env              = var.env
+ allow_ssh_cidr = var.allow_ssh_cidr
 
   }
 
