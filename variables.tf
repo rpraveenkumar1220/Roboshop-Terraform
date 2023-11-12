@@ -19,6 +19,7 @@ variable "min_size" {}
 variable "max_size" {}
 variable "subnet_ref" {}
 variable "lb_rule_priority" {}
+variable "lb_ref" {}
 
 
 
