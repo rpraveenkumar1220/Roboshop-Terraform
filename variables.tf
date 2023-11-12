@@ -10,13 +10,19 @@ variable "docdb" {}
 variable "elasticache" {}
 variable "alb" {}
 variable "apps" {}
-variable "min_size" {}
-variable "max_size" {}
 variable "desired_capacity" {}
 variable "instance_type" {}
 variable "app_port" {}
 variable "lb_dns_name" {}
 variable "subnets" {}
+variable "app_port" {}
+variable "min_size" {}
+variable "max_size" {}
+variable "desired_capacity" {}
+variable "instance_type" {}
+variable "subnet_ref" {}
+variable "lb_rule_priority" {}
+
 
 
 
