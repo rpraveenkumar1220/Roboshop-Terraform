@@ -116,7 +116,7 @@ module "apps" {
  max_size         = each.value["max_size"]
  desired_capacity = each.value["desired_capacity"]
  instance_type    = each.value["instance_type"]
- app_port         = each.value["instance_type"]
+ app_port         = each.value["app_port"]
 
 
  sg_subnet_cidr = each.value["component"] == "frontend" ? local.public_web_subnets_cidr : lookup(lookup(lookup(lookup(var.vpc, "main", null ), "subnets", null), each.value["subnet_ref"], null), "cidr_block", null)
