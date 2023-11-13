@@ -16,6 +16,7 @@ module "app_instance" {
  source    = "git::https://github.com/rpraveenkumar1220/App-Module-Terraform.git"
  component = "test"
  env       = var.env
+ allow_ssh_cidr = var.allow_ssh_cidr
  subnet_id = lookup(lookup(lookup(lookup(module.vpc,"main",null ),"subnet_ids",null),"app",null),"subnet_ids",null)[0]
  vpc_id =lookup(lookup(module.vpc,"main",null), "vpc_id" , null)
 }
