@@ -17,6 +17,7 @@ module "app_instance" {
  component = "test"
  env       = var.env
  allow_ssh_cidr = var.allow_ssh_cidr
+ sg_subnet_cidr =  lookup(lookup(lookup(lookup(module.vpc,"main",null ),"subnet_ids",null),"db",null),"cidr_block",null)
  subnet_id = lookup(lookup(lookup(lookup(module.vpc,"main",null ),"subnet_ids",null),"app",null),"subnet_ids",null)[0]
  vpc_id =lookup(lookup(module.vpc,"main",null), "vpc_id" , null)
 }
