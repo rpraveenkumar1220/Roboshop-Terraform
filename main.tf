@@ -11,16 +11,7 @@
   default_vpc_rt = var.default_vpc_rt
  }
 
-### Creating Instance in the APP subnet
-module "app_instance" {
- source    = "git::https://github.com/rpraveenkumar1220/App-Module-Terraform.git"
- component = "test"
- env       = var.env
- allow_ssh_cidr = var.allow_ssh_cidr
-# sg_subnet_cidr =  lookup(lookup(lookup(lookup(module.vpc,"main",null ),"subnet_ids",null),"db",null),"cidr_block",null)
- subnet_id = lookup(lookup(lookup(lookup(module.vpc,"main",null ),"subnet_ids",null),"app",null),"subnet_ids",null)[0]
- vpc_id =lookup(lookup(module.vpc,"main",null), "vpc_id" , null)
-}
+
 
 
 ### Creating Rabbitmq service
@@ -39,7 +30,6 @@ module "rabbitmq" {
 
 
 
-/*
 ### Creating RDS service
 module "rds" {
  source        = "git::https://github.com/rpraveenkumar1220/RDS-Module-Terraform.git"
@@ -90,9 +80,7 @@ module "elasticache" {
  vpc_id        = lookup(lookup(module.vpc, "main", null), "vpc_id", null)
  env            = var.env
 }
-*/
 
-/*
 ### Creating Application LoadBalancer Module
 module "alb" {
  source             = "git::https://github.com/rpraveenkumar1220/ALB-Module-Terraform.git"
@@ -109,11 +97,9 @@ module "alb" {
  allow_ssh_cidr = var.allow_ssh_cidr
 
 }
-*/
 
 
 
-/*
 ### Creating Application  Module
 module "apps" {
  source           = "git::https://github.com/rpraveenkumar1220/App-Module-Terraform.git"
@@ -136,8 +122,19 @@ module "apps" {
   env              = var.env
  allow_ssh_cidr = var.allow_ssh_cidr
 }
-*/
 
+
+
+/*### Creating Instance in the APP subnet
+module "app_instance" {
+ source    = "git::https://github.com/rpraveenkumar1220/App-Module-Terraform.git"
+ component = "test"
+ env       = var.env
+ allow_ssh_cidr = var.allow_ssh_cidr
+# sg_subnet_cidr =  lookup(lookup(lookup(lookup(module.vpc,"main",null ),"subnet_ids",null),"db",null),"cidr_block",null)
+ subnet_id = lookup(lookup(lookup(lookup(module.vpc,"main",null ),"subnet_ids",null),"app",null),"subnet_ids",null)[0]
+ vpc_id =lookup(lookup(module.vpc,"main",null), "vpc_id" , null)
+}*/
 
 
 
