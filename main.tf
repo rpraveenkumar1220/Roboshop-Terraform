@@ -121,6 +121,8 @@ module "apps" {
   vpc_id           = lookup(lookup(module.vpc, "main", null), "vpc_id", null)
   env              = var.env
  allow_ssh_cidr = var.allow_ssh_cidr
+ kms_key_arn = var.kms_key_arn
+ extra_param_access = try(each.value["extra_param_access"],[])
 }
 
 
