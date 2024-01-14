@@ -102,6 +102,8 @@ module "alb" {
 
 ### Creating Application  Module
 module "apps" {
+
+ depends_on = [module.alb,module.docdb,module.elasticache,module.rabbitmq,module.rds,module.vpc]
  source           = "git::https://github.com/rpraveenkumar1220/App-Module-Terraform.git"
  for_each         = var.apps
  component        = each.value["component"]
