@@ -103,6 +103,7 @@ apps = {
     lb_rule_priority = 100
   }
 
+
   cart={
     component = "cart"
     min_size = 1
@@ -148,7 +149,7 @@ apps = {
     subnet_ref = "app"
     lb_ref = "private"
     lb_rule_priority = 104
-    extra_param_access = ["arn:aws:ssm:us-east-1:739561048503:parameter/roboshop.dev.mysql.*"]
+    extra_param_access = ["arn:aws:ssm:us-east-1:751367052640:parameter/roboshop.dev.mysql.*"]
   }
   payment={
     component = "payment"
