@@ -76,7 +76,7 @@ module "elasticache" {
  replicas_per_node_group=each.value["replicas_per_node_group"]
  kms_key_arn   = var.kms_key_arn
  subnet_ids    = lookup(lookup(lookup(lookup(module.vpc, "main", null ), "subnet_ids", null), "db", null), "subnet_ids", null)
- sg_subnet_cidr = lookup(lookup(lookup(lookup(module.vpc,"main",null ),"subnet_ids",null),"app",null),"cidr_block",null)
+ sg_subnet_cidr = lookup(lookup(lookup(lookup(var.vpc, "main", null), "subnets", null), "app", null), "cidr_block", null)
  vpc_id        = lookup(lookup(module.vpc, "main", null), "vpc_id", null)
  env            = var.env
 }
