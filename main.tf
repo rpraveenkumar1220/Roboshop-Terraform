@@ -117,6 +117,7 @@ module "apps" {
 
 
  sg_subnet_cidr = each.value["component"] == "frontend" ? local.public_web_subnets_cidr : lookup(lookup(lookup(lookup(var.vpc, "main", null ), "subnets", null), each.value["subnet_ref"], null), "cidr_block", null)
+
  subnets        = lookup(lookup(lookup(lookup(module.vpc, "main", null), "subnet_ids", null), each.value["subnet_ref"], null), "subnet_ids", null)
  listener_arn   = lookup(lookup(module.alb, each.value["lb_ref"], null), "listener_arn", null)
  lb_dns_name   = lookup(lookup(module.alb, each.value["lb_ref"], null), "lb_dns_name", null)
