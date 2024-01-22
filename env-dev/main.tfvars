@@ -27,6 +27,7 @@ kms_key_arn    = "arn:aws:kms:us-east-1:751367052640:key/a22c937a-e218-4e4a-b545
 kms_key_id     = "a22c937a-e218-4e4a-b545-d6c384ff99fc"
 
 allow_ssh_cidr = ["172.31.0.0/16"]
+allow_prometheus_cidr = ["172.31.92.198/32"]
 
 vpc = {
   main = {
